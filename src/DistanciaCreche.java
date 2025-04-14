@@ -1,13 +1,15 @@
 public class DistanciaCreche {
 
-    int IdCrecheInicio;
-    int IdCrecheFim;
-    float distancia;
+    private int IdCrecheInicio;
+    private int IdCrecheFim;
+    private float distancia;
+    private DistanciaCreche proximo; //usado para criar a lista encadeada
 
     public DistanciaCreche(int crecheInicio, int crecheFim, float distancia) {
         this.IdCrecheInicio = crecheInicio;
         this.IdCrecheFim = crecheFim;
         this.distancia = distancia;
+        this.proximo = null;
     }
 
     public int getCrecheInicio() {
@@ -22,4 +24,11 @@ public class DistanciaCreche {
         return distancia;
     }
 
+    public DistanciaCreche getProximo() {
+        return proximo;
+    }
+
+    public void setProximo(DistanciaCreche proximo) {
+        this.proximo = proximo;
+    }
 }

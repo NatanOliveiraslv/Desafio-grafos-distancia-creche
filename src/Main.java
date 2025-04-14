@@ -1,37 +1,61 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
+    private static ListaEncadeadaCreche listaCreches = new ListaEncadeadaCreche();
+    private static ListaEncadeadaDistanciaCreche listaDistanciaCreche = new ListaEncadeadaDistanciaCreche();
+    private static Grafo grafo;
+    private static int qtdCreches;
+    private static int qtdQuantidadeDistancia;
+    private static final Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
 
-        ArrayList<Creche> crechesCadastradas = new ArrayList<Creche>();
-        String nome;
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<DistanciaCreche> distanciaCrecheLista = new ArrayList<DistanciaCreche>();
-        DistanciaCreche distanciaCreche;
-        Creche creche;
-        Grafo grafo;
 
         System.out.println("Digite a quantidade de creches: ");
-        int qtdCreches = scanner.nextInt();
+        qtdCreches = scanner.nextInt();
 
-        //Cadastra creche
-        for (int i = 0; i < qtdCreches; i++) {
-            System.out.println("Digite o nome da creche " + i + ": ");
-            nome = scanner.next();
-            creche = new Creche(i, nome);
-            crechesCadastradas.add(creche);
-        }
+        cadastrarCreches();
+        imprimirCrechesCadastradas();
 
-        System.out.println("Digite a quantidade de distancias: ");
-        int qtdQuantidadeDistancia = scanner.nextInt();
+
+        System.out.println("\nDigite a quantidade de distancias: ");
+        qtdQuantidadeDistancia = scanner.nextInt();
 
         grafo = new Grafo(qtdCreches, qtdQuantidadeDistancia, false);
 
-        //Cadastra distancia entre as creches
+        cadastrarDistanciaCreche();
+
+        grafo.imprimirMatriz();
+
+        System.out.println();
+
+
+
+    }
+
+    // Funcao para cadastrar as creches
+    private static void cadastrarCreches() {
+        for (int i = 0; i < qtdCreches; i++) {
+            System.out.println("Digite o nome da creche " + i + ": ");
+            String nome = scanner.next();
+            Creche creche = new Creche(nome);
+            listaCreches.adicionar(creche);
+        }
+    }
+
+    // Funcao para imprimir as creches cadastradas
+    private static void imprimirCrechesCadastradas() {
+        System.out.println("\nCreches cadastradas: ");
+        for (Creche creche : listaCreches.conteudo()) {
+            System.out.println("Creche " + creche.getId() + ": " + creche.getNome());
+        }
+    }
+
+    // Funcao para cadastrar as distancias entre as creches e o grafo
+    private static void cadastrarDistanciaCreche() {
         for (int i = 0; i < qtdQuantidadeDistancia; i++) {
             System.out.println("Digite o id da creche incial: ");
             int crecheInicial = scanner.nextInt();
@@ -40,45 +64,24 @@ public class Main {
             System.out.println("Digite a distancia entre as duas: ");
             float distancia = scanner.nextFloat();
 
-            distanciaCreche = new DistanciaCreche(crecheInicial, crecheFinal, distancia);
-            distanciaCrecheLista.add(distanciaCreche);
+            DistanciaCreche distanciaCreche = new DistanciaCreche(crecheInicial, crecheFinal, distancia);
+            listaDistanciaCreche.adicionar(distanciaCreche);
             grafo.adicionarAresta(crecheInicial, crecheFinal);
         }
-
-        grafo.imprimirMatriz();
-        System.out.println();
-
-        int[][] matriz = grafo.retornaMatriz();
-
-        String nomeCreche = null;
-        String nomeCreche2 = null;
-        float distancia = 0;
-
-        for (int i = 0; i < qtdCreches; i++) {
-            //busca creche
-            for (Creche creche1 : crechesCadastradas) {
-                if (creche1.getId() == i) {
-                    nomeCreche = creche1.getNome();
-                }
-            }
-
-            for (int j = 0; j < qtdCreches; j++) {
-                if (j == 1) {
-                    for (Creche creche2 : crechesCadastradas) {
-                        if (creche2.getId() == j) {
-                            nomeCreche2 = creche2.getNome();
-                        }
-                    }
-                    for (DistanciaCreche teste : distanciaCrecheLista) {
-                        if (teste.getCrecheInicio() == i && teste.getCrecheFim() == j) {
-                            distancia = teste.getDistancia();
-                        }
-                    }
-                    System.out.println("A distancia entre a creche " + nomeCreche + "e a creche " + nomeCreche2 + "é " + distancia);
-                }
-            }
-        }
-
     }
 
+    // Funcao para imprimir as distancias da conexoes entre uma creche
+    private int listarCrechesConectadas(int idCreche){
+        int qtdConectadas = 0;
+        for (int i = 0; i < qtdCreches; i++) {
+            if (grafo.retornaMatriz()[idCreche][i] == 1) {
+                System.out.println("Creche " + listaCreches.retornaCreche(i).getNome() +
+                                   " está conectada a creche " + listaCreches.retornaCreche(i).getNome() +
+                                   " com a distancia de " + listaDistanciaCreche.retornaDistancia(idCreche, i));
+                qtdConectadas++;
+            }
+        }
+        return qtdConectadas;
+    }
+    
 }

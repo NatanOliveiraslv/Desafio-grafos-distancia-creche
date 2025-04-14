@@ -1,11 +1,15 @@
 public class Creche {
 
-    int id;
-    String nome;
+    private static int idContador = 0;
+    private final int id;
+    private String nome;
+    private Creche proximo; //usado para criar a lista encadeada
 
-    public Creche(int id, String nome) {
-        this.id = id;
+    public Creche(String nome) {
+        this.id = idContador;
+        idContador++;
         this.nome = nome;
+        this.proximo = null;
     }
 
     public int getId() {
@@ -14,5 +18,13 @@ public class Creche {
 
     public String getNome() {
         return nome;
+    }
+
+    public Creche getProximo() {
+        return proximo;
+    }
+
+    public void setProximo(Creche proximo) {
+        this.proximo = proximo;
     }
 }
