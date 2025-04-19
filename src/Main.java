@@ -1,87 +1,45 @@
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-
-    private static ListaEncadeadaCreche listaCreches = new ListaEncadeadaCreche();
-    private static ListaEncadeadaDistanciaCreche listaDistanciaCreche = new ListaEncadeadaDistanciaCreche();
-    private static Grafo grafo;
-    private static int qtdCreches;
-    private static int qtdQuantidadeDistancia;
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
+        CarregaTxt carregaTxt = new CarregaTxt("estrutura.txt");
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Digite a quantidade de creches: ");
-        qtdCreches = scanner.nextInt();
+        int opcao = 0;
 
-        cadastrarCreches();
-        imprimirCrechesCadastradas();
+        do{
 
+            System.out.println("\n----------------------------------");
+            System.out.println("| 1 - Listar conexoes            |");
+            System.out.println("| 2 - Buscar conexão de creche   |");
+            System.out.println("| 3 - Cadastrar nova creche      |");
+            System.out.println("| 0 - Para sair                  |");
+            System.out.println("----------------------------------\n");
 
-        System.out.println("\nDigite a quantidade de distancias: ");
-        qtdQuantidadeDistancia = scanner.nextInt();
+            System.out.println("Digite a opção desejada");
+            opcao = scanner.nextInt();
 
-        grafo = new Grafo(qtdCreches, qtdQuantidadeDistancia, false);
-
-        cadastrarDistanciaCreche();
-
-        grafo.imprimirMatriz();
-
-        System.out.println();
-
-
-
-    }
-
-    // Funcao para cadastrar as creches
-    private static void cadastrarCreches() {
-        for (int i = 0; i < qtdCreches; i++) {
-            System.out.println("Digite o nome da creche " + i + ": ");
-            String nome = scanner.next();
-            Creche creche = new Creche(nome);
-            listaCreches.adicionar(creche);
-        }
-    }
-
-    // Funcao para imprimir as creches cadastradas
-    private static void imprimirCrechesCadastradas() {
-        System.out.println("\nCreches cadastradas: ");
-        for (Creche creche : listaCreches.conteudo()) {
-            System.out.println("Creche " + creche.getId() + ": " + creche.getNome());
-        }
-    }
-
-    // Funcao para cadastrar as distancias entre as creches e o grafo
-    private static void cadastrarDistanciaCreche() {
-        for (int i = 0; i < qtdQuantidadeDistancia; i++) {
-            System.out.println("Digite o id da creche incial: ");
-            int crecheInicial = scanner.nextInt();
-            System.out.println("Digite o id da creche final: ");
-            int crecheFinal = scanner.nextInt();
-            System.out.println("Digite a distancia entre as duas: ");
-            float distancia = scanner.nextFloat();
-
-            DistanciaCreche distanciaCreche = new DistanciaCreche(crecheInicial, crecheFinal, distancia);
-            listaDistanciaCreche.adicionar(distanciaCreche);
-            grafo.adicionarAresta(crecheInicial, crecheFinal);
-        }
-    }
-
-    // Funcao para imprimir as distancias da conexoes entre uma creche
-    private int listarCrechesConectadas(int idCreche){
-        int qtdConectadas = 0;
-        for (int i = 0; i < qtdCreches; i++) {
-            if (grafo.retornaMatriz()[idCreche][i] == 1) {
-                System.out.println("Creche " + listaCreches.retornaCreche(i).getNome() +
-                                   " está conectada a creche " + listaCreches.retornaCreche(i).getNome() +
-                                   " com a distancia de " + listaDistanciaCreche.retornaDistancia(idCreche, i));
-                qtdConectadas++;
+            switch (opcao){
+                case 1:
+                    carregaTxt.imprimirConexoes();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 0:
+                    System.out.println("saindo...");
+                    break;
             }
-        }
-        return qtdConectadas;
+
+        }while (opcao != 0);
+
     }
-    
+
+    private static void cadastrarCreches() {
+
+        }
+
 }

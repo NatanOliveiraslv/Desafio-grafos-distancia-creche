@@ -12,6 +12,10 @@ public class DistanciaCreche {
         this.proximo = null;
     }
 
+    public DistanciaCreche(){
+        this.proximo = null;
+    }
+
     public int getCrecheInicio() {
         return IdCrecheInicio;
     }
@@ -24,11 +28,33 @@ public class DistanciaCreche {
         return distancia;
     }
 
+    public void setIdCrecheInicio(int idCrecheInicio) {
+        IdCrecheInicio = idCrecheInicio;
+    }
+
+    public void setIdCrecheFim(int idCrecheFim) {
+        IdCrecheFim = idCrecheFim;
+    }
+
+    public void setDistancia(float distancia) {
+        this.distancia = distancia;
+    }
+
     public DistanciaCreche getProximo() {
         return proximo;
     }
 
     public void setProximo(DistanciaCreche proximo) {
         this.proximo = proximo;
+    }
+
+    @Override
+    public String toString() {
+        return "DistanciaCreche{" +
+                "IdCrecheInicio=" + IdCrecheInicio +
+                ", IdCrecheFim=" + IdCrecheFim +
+                ", distancia=" + distancia +
+                ", proximo=" + proximo +
+                '}';
     }
 }

@@ -7,21 +7,21 @@ public class Grafo {
     private int[][] matriz;
     private boolean ehDigrafo;
 
-    public Grafo(int nodos, int aresta, boolean ehDigrafo) {
+    public Grafo(int nodos, boolean ehDigrafo) {
         this.nodos = nodos;
-        this.aresta = aresta;
         this.ehDigrafo = ehDigrafo;
         this.matriz = new int[nodos][nodos];
     }
 
     public void adicionarAresta(int nodo1, int nodo2) {
-        if(this.aresta < nodo1 || this.aresta < nodo2){
-            System.out.println("Aresta não existe");
+        if(this.nodos < nodo1 || this.nodos < nodo2){
+            System.out.println("Nodo não existe");
         }
         matriz[nodo1][nodo2] = 1;
         if (!ehDigrafo) {
             matriz[nodo2][nodo1] = 1;
         }
+        this.aresta++;
     }
 
     public void imprimirMatriz() {
@@ -38,8 +38,12 @@ public class Grafo {
         return matriz;
     }
 
-    public void imprimiGrau() {
-        System.out.println("Grau dos vertice:\n");
+    public int getAresta() {
+        return aresta;
+    }
+
+    public int[] imprimiGrau() {
+        int[] grauArray = new int[nodos];
         if (!ehDigrafo) {
             for (int i = 0; i < nodos; i++) {
                 int grau = 0;
@@ -48,8 +52,7 @@ public class Grafo {
                         grau++;
                     }
                 }
-                System.out.println("Grau do " + (i+1) + "° vertice informado:\n" + "Grau: " + grau);
-                System.out.println();
+                grauArray[i] = grau;
             }
         } else {
             for (int i = 0; i < nodos; i++) {
@@ -67,6 +70,7 @@ public class Grafo {
                 System.out.println();
             }
         }
+        return grauArray;
     }
 
 }

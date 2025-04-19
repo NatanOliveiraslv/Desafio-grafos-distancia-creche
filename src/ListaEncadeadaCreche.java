@@ -1,6 +1,6 @@
 public class ListaEncadeadaCreche {
     private Creche head;
-    private int qtdPosicoesOcupadas = 0;
+    private int qtdCreches = 0;
 
     public ListaEncadeadaCreche() {
     }
@@ -11,7 +11,7 @@ public class ListaEncadeadaCreche {
         //inser o obeto no head caso esteja nulo
         if (this.head == null) {
             this.head = creche;
-            this.qtdPosicoesOcupadas++;
+            this.qtdCreches++;
             return;
         }
 
@@ -22,7 +22,7 @@ public class ListaEncadeadaCreche {
         }
 
         aux.setProximo(creche);
-        this.qtdPosicoesOcupadas++;
+        this.qtdCreches++;
     }
 
     //Remover creche
@@ -32,7 +32,7 @@ public class ListaEncadeadaCreche {
         if (this.head.getProximo() == null) {
             if (this.head.equals(creche)) {
                 this.head = null;
-                qtdPosicoesOcupadas--;
+                qtdCreches--;
                 return true;
             }
         }
@@ -40,12 +40,12 @@ public class ListaEncadeadaCreche {
         Creche aux = this.head;
         Creche auxValorAnterior;
 
-        for (int i = 0; i < qtdPosicoesOcupadas; i++) {
+        for (int i = 0; i < qtdCreches; i++) {
             auxValorAnterior = aux;
             aux = aux.getProximo();
             if (aux.equals(creche)) {
                 auxValorAnterior.setProximo(aux.getProximo());
-                qtdPosicoesOcupadas--;
+                qtdCreches--;
                 return true;
             }
         }
@@ -79,12 +79,12 @@ public class ListaEncadeadaCreche {
     //Visualizar lista completa
     public Creche[] conteudo() {
 
-        if (qtdPosicoesOcupadas == 0) {
+        if (qtdCreches == 0) {
             return null;
         }
 
         Creche aux = this.head;
-        Creche[] lista = new Creche[this.qtdPosicoesOcupadas];
+        Creche[] lista = new Creche[this.qtdCreches];
         int i = 0;
 
         while (aux.getProximo() != null) {
@@ -98,15 +98,15 @@ public class ListaEncadeadaCreche {
     }
 
     //Retorna o quantidade de posicoes ocupadas
-    public int getQtdPosicoesOcupadas() {
-        return qtdPosicoesOcupadas;
+    public int getQtdCreches() {
+        return qtdCreches;
     }
 
     //Retorna a creche pelo ID
     public Creche retornaCreche(int id){
         Creche aux = this.head;
 
-        while(aux.getProximo() != null){
+        while(aux != null){
             if(aux.getId() == id){
                 return aux;
             }
