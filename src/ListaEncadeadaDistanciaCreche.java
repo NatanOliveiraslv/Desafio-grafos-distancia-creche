@@ -97,12 +97,13 @@ public class ListaEncadeadaDistanciaCreche {
         return lista;
     }
 
-    //retorna distancia
-    public Float retornaDistancia(int crecheInicio, int crecheFim){
+    public DistanciaCreche retornaDistanciaCreche(int crecheInicio, int crecheFim){
         DistanciaCreche aux = this.head;
         while (aux != null) {
-            if (aux.getCrecheInicio() == crecheInicio && aux.getCrecheFim() == crecheFim) {
-                return aux.getDistancia();
+            //verifica se no aux o id da creche incial ou final e igual ao digitado, ou vice e versa, pois trata-se de um grafo
+            if ((aux.getCrecheInicio() == crecheInicio && aux.getCrecheFim() == crecheFim) || (aux.getCrecheInicio() == crecheFim && aux.getCrecheFim() == crecheInicio)) {
+                //Cria um novo objeto, pois ao retornar o obejto localizado estava ocorrendo erros ao usar o setProximo
+                return new DistanciaCreche(aux.getCrecheInicio(), aux.getCrecheFim(), aux.getDistancia());
             }
             aux = aux.getProximo();
         }
@@ -112,5 +113,22 @@ public class ListaEncadeadaDistanciaCreche {
     //Retorna o quantidade de posicoes ocupadas
     public int getQtdPosicoesOcupadas() {
         return qtdPosicoesOcupadas;
+    }
+
+    public DistanciaCreche[] conteudoOrdenadoPorDistancia() {
+        DistanciaCreche[] conteudo = conteudo();
+        DistanciaCreche aux = null;
+
+        for(int i = 0; i<conteudo.length; i++){
+            for(int j = 0; j<conteudo.length - 1; j++){
+                if(conteudo[j].getDistancia() > conteudo[j + 1].getDistancia()){
+                    aux = conteudo[j];
+                    conteudo[j] = conteudo[j+1];
+                    conteudo[j+1] = aux;
+                }
+            }
+        }
+
+        return conteudo;
     }
 }

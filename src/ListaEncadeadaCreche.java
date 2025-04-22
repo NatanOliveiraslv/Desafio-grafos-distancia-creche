@@ -103,11 +103,23 @@ public class ListaEncadeadaCreche {
     }
 
     //Retorna a creche pelo ID
-    public Creche retornaCreche(int id){
+    public Creche retornaCrechePorId(int id){
         Creche aux = this.head;
 
         while(aux != null){
             if(aux.getId() == id){
+                return aux;
+            }
+            aux = aux.getProximo();
+        }
+        return null;
+    }
+
+    public Creche retornaCrechePorNome(String nome){
+        Creche aux = this.head;
+
+        while(aux != null){
+            if(aux.getNome().equalsIgnoreCase(nome)){
                 return aux;
             }
             aux = aux.getProximo();
