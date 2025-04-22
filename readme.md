@@ -1,4 +1,3 @@
-```markdown
 # Gerenciador de Conexões de Creches
 
 Este projeto é uma aplicação baseada em Java projetada para gerenciar e analisar conexões entre creches. Ele fornece funcionalidades para listar creches, registrar conexões, calcular distâncias e exibir matrizes de conexões.
@@ -87,4 +86,3 @@ Sinta-se à vontade para fazer um fork deste repositório e enviar solicitaçõe
 ## Licença
 
 Este projeto está licenciado sob a licença MIT.
-```
