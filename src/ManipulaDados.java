@@ -77,7 +77,6 @@ public class ManipulaDados {
         for (int j = 0; j < matriz.length; j++) {
             if (matriz[crecheBuscada.getId()][j] == 1) {
                 distanciaCreche = listaDistanciaCreche.retornaDistanciaCreche(crecheBuscada.getId(), j);
-                distanciaCreche.setProximo(null);
                 distanciaBuscada.adicionar(distanciaCreche);
             }
         }
