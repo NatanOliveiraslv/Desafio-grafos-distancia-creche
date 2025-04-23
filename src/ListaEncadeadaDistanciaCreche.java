@@ -101,9 +101,15 @@ public class ListaEncadeadaDistanciaCreche {
         DistanciaCreche aux = this.head;
         while (aux != null) {
             //verifica se no aux o id da creche incial ou final e igual ao digitado, ou vice e versa, pois trata-se de um grafo
-            if ((aux.getCrecheInicio() == crecheInicio && aux.getCrecheFim() == crecheFim) || (aux.getCrecheInicio() == crecheFim && aux.getCrecheFim() == crecheInicio)) {
+            if (aux.getCrecheInicio() == crecheInicio && aux.getCrecheFim() == crecheFim) {
+                System.out.println("aqui1");
                 //Cria um novo objeto, pois ao retornar o obejto localizado estava ocorrendo erros ao usar o setProximo
-                return new DistanciaCreche(aux.getCrecheInicio(), aux.getCrecheFim(), aux.getDistancia());
+                return new DistanciaCreche(crecheInicio, crecheFim, aux.getDistancia());
+
+            } else if (aux.getCrecheInicio() == crecheFim && aux.getCrecheFim() == crecheInicio) {
+
+                //Cria um novo objeto, pois ao retornar o obejto localizado estava ocorrendo erros ao usar o setProximo
+                return new DistanciaCreche(crecheInicio, crecheFim, aux.getDistancia());
             }
             aux = aux.getProximo();
         }
